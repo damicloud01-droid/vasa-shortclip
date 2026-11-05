@@ -394,9 +394,9 @@ const salvage = (cam: CamInfo, t: number, out: Stage) => {
 const museum = (cam: CamInfo, t: number, out: Stage) => {
   const [x0, y0, z0] = MUSEUM;
   for (let i = 0; i < 26; i++) {
-    const sp = 0.4 + hh(i) * 0.4, ang = (i / 26) * Math.PI * 2;
-    const x = x0 + Math.cos(ang) * 27 + (hh(i, 2) - 0.5) * 3 - (i % 2 ? sp * t * 0.3 : 0), z = z0 + Math.sin(ang) * 11 - 3 - hh(i, 3) * 3;
-    if (Math.abs(z - z0) < 8 && Math.abs(x - x0) < 25) continue;
+    // the visitors' walkway along the near rail (z -10 .. -17), strolling slowly along the hull
+    const sp = 0.25 + hh(i) * 0.35;
+    const x = x0 - 32 + (i / 26) * 64 + (hh(i, 2) - 0.5) * 2 + (i % 2 ? 1 : -1) * sp * (t % 30) * 0.3, z = z0 - 10.5 - hh(i, 3) * 6.5;
     const expr: Expr = (["smile", "smile_closed", "grin", "neutral"] as Expr[])[i % 4];
     const fo: FrontOpts = { mode: "stand", expr, look: i % 3 - 1, blink: lidAt(t, i + 180), wave: i % 9 === 4 ? 0.3 : undefined };
     out.places.push(person(cam, { i: i + 180, o: TOUR[i % 8], okey: `t${i % 8}` }, x, y0, z, { side: false, mirror: false }, fo, {}, i % 6 === 5 ? 0.72 : 1));
