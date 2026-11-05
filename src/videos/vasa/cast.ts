@@ -295,12 +295,12 @@ const voyageCrew = (cam: CamInfo, t: number, out: Stage, ctx: ShipCtx) => {
 const sinkFx = (t: number, out: Stage, ctx: ShipCtx) => {
   const tw = W("water"), td = W("down", 2);
   if (t > tw - 0.1 && t < td + 2.5) {
-    PORTS_X.forEach((px, i) => {
-      if (i % 2) return;
-      const p = ctx.toW([px, PORT_Y[0] + 0.25, halfBeam(px, PORT_Y[0]) + 0.2]);
-      if (p.y < -0.5) return;
+    // wherever a port row meets the waterline, water pours over the sill
+    for (const py of PORT_Y) PORTS_X.forEach((px, i) => {
+      const p = ctx.toW([px, py + 0.25, halfBeam(px, py) + 0.2]);
+      if (p.y < -1.4 || p.y > 1.6) return;
       const u = q((t * 1.7 + i * 0.13) % 1, 30);
-      out.fx.push({ key: `gush${u}`, cw: 400, ch: 400, draw: (pp) => fxGush(pp, u * 6), x: p.x, y: Math.max(0.35, p.y), z: p.z + 0.3, w: 1.8, h: 1.8 });
+      out.fx.push({ key: `gush${u}`, cw: 400, ch: 400, draw: (pp) => fxGush(pp, u * 6), x: p.x, y: 0.5, z: p.z + 0.35, w: 1.7, h: 1.7 });
     });
   }
   const u = (t - td - 0.9) / 1.6;
@@ -320,12 +320,13 @@ const sinkFx = (t: number, out: Stage, ctx: ShipCtx) => {
 
 /** the king on a golden field, tapping his foot, a toy ship in hand; battle smoke behind */
 const king = (cam: CamInfo, t: number, out: Stage) => {
-  const [x, y, z] = KING_AT, tap = Math.max(0, Math.sin(t * 9)) * 0.04;
-  const expr: Expr = live(t, W("wanted")) ? "stern" : "nervous";
-  out.places.push(person(cam, { i: 90, o: KING, okey: "king" }, x, y + tap, z, { side: false, mirror: false }, { mode: "stand", expr, blink: lidAt(t, 90), headTilt: 0.05 * Math.sin(t * 3) }, {}));
+  const [x, y, z] = KING_AT, tap = Math.max(0, Math.sin(t * 9)) * 0.04, shake = Math.sin(t * 7);
+  // impatient: holds the toy ship up and shakes it ("where is my ship?")
+  out.places.push(person(cam, { i: 90, o: KING, okey: "king" }, x, y + tap, z, { side: false, mirror: false },
+    { mode: "stand", expr: "stern", blink: lidAt(t, 90), wave: q(0.4 + 0.4 * shake, 10), headTilt: 0.04 * Math.sin(t * 3) }, {}));
   blob(out, x, y, z);
-  const hx = x + 0.62 * cam.right.x, hz = z + 0.62 * cam.right.z;
-  out.fx.push({ key: "toyship", cw: 400, ch: 300, draw: fxToyShip, x: hx, y: y + 1.05 + Math.sin(t * 4) * 0.03, z: hz - 0.1, w: 0.6, h: 0.45 });
+  const hx = x + (0.42 + 0.02 * shake) * cam.right.x, hz = z + (0.42 + 0.02 * shake) * cam.right.z;
+  out.fx.push({ key: "toyship", cw: 400, ch: 300, draw: fxToyShip, x: hx, y: y + tap + 1.62 + 0.03 * shake, z: hz - 0.05, w: 0.6, h: 0.45, rot: 0.15 * shake });
   for (let i = 0; i < 7; i++) {
     const u = q(((t * 0.25 + i / 7) % 1), 30), sx = x + (i - 3) * 9 + 3 * Math.sin(i), sz = z + 26 + (i % 3) * 8;
     out.fx.push({ key: `smoke${u}`, cw: 400, ch: 400, draw: (p) => fxSmoke(p, u), x: sx, y: y + 2 + u * 5, z: sz, w: 9, h: 9, soft: true });

@@ -29,7 +29,7 @@ const haloTex = () => ctex("sunHalo", 256, 256, (g) => {
   g.putImageData(im, 0, 0);
 });
 /** per-shot sun (camera-relative az / el) where the preset would light the subject badly */
-const SUN_SHOT: Record<number, { az?: number; el?: number }> = { 2: { az: 120 }, 6: { az: 30, el: 9 }, 9: { az: -25, el: 8 }, 12: { az: 110, el: 55 } };
+const SUN_SHOT: Record<number, { az?: number; el?: number }> = { 1: { az: 140, el: 40 }, 2: { az: 130 }, 4: { az: 140, el: 42 }, 6: { az: 30, el: 9 }, 7: { az: 150, el: 38 }, 9: { az: -25, el: 8 }, 11: { az: 140, el: 40 }, 12: { az: 110, el: 55 } };
 
 /** horizontal quad facing up at height y over x0..x1, z0..z1 (z0 < z1), uv tiled by u, v */
 function quadUp(x0: number, x1: number, z0: number, z1: number, u: number, v: number, y = D0) {
@@ -211,21 +211,21 @@ export class World {
     for (let i = 0; i < 9; i++) b.add(boxGeo(V(kx - 6 + i * 1.6, ky, kz + 4), V(kx - 5.85 + i * 1.6, ky + 1.1, kz + 4.15)), timber); // fence posts
     b.add(boxGeo(V(kx - 6.2, ky + 0.75, kz + 4.02), V(kx + 7.4, ky + 0.9, kz + 4.12)), timber);
     { // flag pole + Swedish flag by the king
-      b.add(new THREE.CylinderGeometry(0.06, 0.08, 6.5, 8), timber, new THREE.Matrix4().makeTranslation(kx - 3.5, ky + 3.25, kz + 3));
+      b.add(new THREE.CylinderGeometry(0.06, 0.08, 6.5, 8), timber, new THREE.Matrix4().makeTranslation(kx - 7, ky + 3.25, kz + 14));
       const f = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 1.5, 12, 1).translate(1.2, -0.75, 0), lam("flagSEk", () => ({ map: flagSE(true), side: THREE.DoubleSide, alphaTest: 0.5 })));
-      f.position.set(kx - 3.5, ky + 6.4, kz + 3); f.castShadow = true; this.flags.push(f); R.add(f);
+      f.position.set(kx - 7, ky + 6.4, kz + 14); f.castShadow = true; this.flags.push(f); R.add(f);
     }
 
     // ---- the inquiry hall: panelled room, raised bench, windows, a little table with the candle ----
     const [ix, iy, iz] = INQUIRY;
     b.add(quadUp(ix - 200, ix + 200, iz - 200, iz + 200, 100, 100, iy), grass);
     b.add(quadUp(ix - 8, ix + 8, iz - 10, iz + 5, 4, 3.75, iy + 0.01), planks);
-    const panel = lam("panel", () => ({ map: rep(panelTex(), 4, 1.5) }));
+    const panel = lam("panel", () => ({ map: rep(panelTex(), 4, 1.5), side: THREE.DoubleSide }));
     const walls = new Batch();
     walls.add(quad(V(ix - 8, iy, iz + 5), V(ix + 8, iy, iz + 5), V(ix + 8, iy + 6.5, iz + 5), V(ix - 8, iy + 6.5, iz + 5)).scale(1, 1, 1), panel);
     walls.add(quad(V(ix + 8, iy, iz + 5), V(ix + 8, iy, iz - 10), V(ix + 8, iy + 6.5, iz - 10), V(ix + 8, iy + 6.5, iz + 5)), panel);
     walls.add(quad(V(ix - 8, iy, iz - 10), V(ix - 8, iy, iz + 5), V(ix - 8, iy + 6.5, iz + 5), V(ix - 8, iy + 6.5, iz - 10)), panel);
-    walls.add(quad(V(ix - 8, iy + 6.5, iz + 5), V(ix + 8, iy + 6.5, iz + 5), V(ix + 8, iy + 6.5, iz - 10), V(ix - 8, iy + 6.5, iz - 10)), dark);
+    walls.add(quad(V(ix - 8, iy + 6.5, iz + 5), V(ix + 8, iy + 6.5, iz + 5), V(ix + 8, iy + 6.5, iz - 10), V(ix - 8, iy + 6.5, iz - 10)), lam("ceilWood", () => ({ color: "#5a3a22", side: THREE.DoubleSide })));
     walls.build(R, false);
     b.add(boxGeo(V(ix - 3.4, iy, iz + 2.2), V(ix + 3.4, iy + 0.5, iz + 4.8), 1), planks); // dais
     b.add(boxGeo(V(ix - 3.0, iy + 0.5, iz + 2.3), V(ix + 3.0, iy + 1.45, iz + 2.9)), lam("bench", () => ({ color: "#7a2e2a" })));
@@ -272,13 +272,13 @@ export class World {
     const [mx, my, mz] = MUSEUM;
     b.add(quadUp(mx - 400, mx + 400, mz - 400, mz + 400, 200, 200, my), lam("museumFloor", () => ({ color: "#6a6470" })));
     b.add(quad(V(mx - 400, -3, mz - 400), V(mx + 400, -3, mz - 400), V(mx + 400, my, mz - 400), V(mx - 400, my, mz - 400)), quayStone);
-    const hall = new Batch(), hm = lam("hallWall", () => ({ map: rep(hallTex(), 8, 3) }));
+    const hall = new Batch(), hm = lam("hallWall", () => ({ map: rep(hallTex(), 8, 3), side: THREE.DoubleSide }));
     const H = 44;
     hall.add(quad(V(mx - 55, my, mz + 40), V(mx + 55, my, mz + 40), V(mx + 55, my + H, mz + 40), V(mx - 55, my + H, mz + 40)), hm);
     hall.add(quad(V(mx + 55, my, mz + 40), V(mx + 55, my, mz - 60), V(mx + 55, my + H, mz - 60), V(mx + 55, my + H, mz + 40)), hm);
     hall.add(quad(V(mx - 55, my, mz - 60), V(mx - 55, my, mz + 40), V(mx - 55, my + H, mz + 40), V(mx - 55, my + H, mz - 60)), hm);
     hall.add(quad(V(mx - 55, my, mz - 60), V(mx + 55, my, mz - 60), V(mx + 55, my + H, mz - 60), V(mx - 55, my + H, mz - 60)).scale(1, 1, 1), hm);
-    hall.add(quad(V(mx - 55, my + H, mz + 40), V(mx + 55, my + H, mz + 40), V(mx + 55, my + H, mz - 60), V(mx - 55, my + H, mz - 60)), lam("hallCeil", () => ({ color: "#2e2a34" })));
+    hall.add(quad(V(mx - 55, my + H, mz + 40), V(mx + 55, my + H, mz + 40), V(mx + 55, my + H, mz - 60), V(mx - 55, my + H, mz - 60)), lam("hallCeil", () => ({ color: "#2e2a34", side: THREE.DoubleSide })));
     hall.build(R, false);
     for (const x of [-16, -6, 4, 14]) b.add(boxGeo(V(mx + x - 1.2, my, mz - 2.5), V(mx + x + 1.2, my + 0.9, mz + 2.5)), dark); // cradle
     for (let x = -30; x <= 30; x += 3) for (const z of [-9, 9]) b.add(new THREE.CylinderGeometry(0.05, 0.05, 1.0, 6), lam("rail", () => ({ color: "#c9c4cc" })), new THREE.Matrix4().makeTranslation(mx + x, my + 0.5, mz + z));

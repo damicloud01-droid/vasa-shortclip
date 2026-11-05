@@ -3,3 +3,6 @@ out/
 voice/*.wav
 *.mp4
 remotion-tmp/
+audio/out/
+audio/_cache/
+__pycache__/

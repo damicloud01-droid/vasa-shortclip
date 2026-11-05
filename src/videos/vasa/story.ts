@@ -202,21 +202,21 @@ const CAMS = (): Record<number, Key[]> => {
     ],
     3: [
       // "But weeks earlier, there'd been a test": on deck (camera rides the ship), the admiral and his sailors
-      { f: k("But"), s: (f) => dolly([-12, DECK_Y + 2.2, 0], [0, DECK_Y + 1.4, 0], pushK(f, k("But"), 0.002), { fov: 46, onShip: true }) },
+      { f: k("But"), s: (f) => dolly([-8.6, DECK_Y + 1.9, 1.6], [2, DECK_Y + 1.3, 0], pushK(f, k("But"), 0.002), { fov: 46, onShip: true }) },
       // "Thirty sailors ran from one side of the deck to the other": high on the stern, looking forward, the crowd runs across
-      { f: k("Thirty"), cut: true, s: (f) => dolly([-17, DECK_Y + 6, 0], [-2, DECK_Y + 0.5, 0], pushK(f, k("Thirty"), 0.002), { fov: 48, onShip: true }) },
+      { f: k("Thirty"), cut: true, s: (f) => dolly([-19, 17.2, 3.0], [1.5, DECK_Y + 0.6, -0.4], pushK(f, k("Thirty"), 0.002), { fov: 48, onShip: true }) },
     ],
     4: [
       // "The ship rolled": outside, bow-on from the water, the whole ship tips
-      { f: k("ship", 1), s: (f) => dolly([60, 4, 0], [0, 9, 0], pushK(f, k("ship", 1), 0.002), { fov: 42 }) },
+      { f: k("ship", 1), s: (f) => dolly([50, 4.5, 34], [-2, 9, 0], pushK(f, k("ship", 1), 0.002), { fov: 44 }) },
       // "They ran back": back on deck
-      { f: k("back"), cut: true, s: (f) => dolly([-17, DECK_Y + 6, 0], [-2, DECK_Y + 0.5, 0], pushK(f, k("back"), 0.0025), { fov: 46, onShip: true }) },
+      { f: k("back"), cut: true, s: (f) => dolly([-19, 17.2, 3.0], [1.5, DECK_Y + 0.6, -0.4], pushK(f, k("back"), 0.0025), { fov: 46, onShip: true }) },
       // "It rolled further": outside again, closer, with a roll
-      { f: k("rolled", 2) - 6, cut: true, s: (f) => dolly([46, 3, -8], [0, 10, 0], pushK(f, k("rolled", 2), 0.003, 0.006, 30), { fov: 42, roll: 0.06 }) },
+      { f: k("rolled", 2) - 6, cut: true, s: (f) => dolly([36, 3.2, 30], [-2, 10, 0], pushK(f, k("rolled", 2), 0.003, 0.006, 30), { fov: 44, roll: 0.06 }) },
     ],
     5: [
       // "On the third run": the deck, the crowd running again
-      { f: k("third"), s: (f) => dolly([-17, DECK_Y + 6, 0], [-2, DECK_Y + 0.5, 0], pushK(f, k("third"), 0.003), { fov: 46, onShip: true }) },
+      { f: k("third"), s: (f) => dolly([-19, 17.2, 3.0], [1.5, DECK_Y + 0.6, -0.4], pushK(f, k("third"), 0.003), { fov: 46, onShip: true }) },
       // "the admiral stopped them": close on the admiral, hand up
       { f: k("admiral"), cut: true, s: (f) => dolly([-6.2, DECK_Y + 1.75, -0.6], [-2.5, DECK_Y + 1.7, 0.4], pushK(f, k("admiral"), 0.003, 0.007, 25), { fov: 38, onShip: true, roll: -0.04 }) },
       // "So, naturally, they launched it anyway": the admiral, deadpan, square to camera
@@ -231,13 +231,13 @@ const CAMS = (): Record<number, Key[]> => {
       // "She makes it thirteen hundred metres": high, ahead of her, sailing out past the crowds
       { f: k("makes"), s: (f) => { const x = sx(7, f); return dolly([x + 45, 28, 55], [x + 2, 6, 0], pushK(f, k("makes"), 0.002), { fov: 46 }); } },
       // "Then, a gust of wind": broadside, sails fill
-      { f: k("gust") - 8, cut: true, s: (f) => { const x = sx(7, f); return dolly([x - 4, 7, 60], [x, 13, 0], pushK(f, k("gust"), 0.0025), { fov: 46 }); } },
+      { f: k("gust") - 8, cut: true, s: (f) => { const x = sx(7, f); return dolly([x + 52, 9, 34], [x - 2, 16, 0], pushK(f, k("gust"), 0.0025), { fov: 50 }); } },
       // "She leans": lower, roll with her
-      { f: k("leans"), dur: 26, s: (f) => { const x = sx(7, f); return dolly([x - 2, 4, 52], [x, 10, 0], pushK(f, k("leans"), 0.003), { fov: 44, roll: 0.07 }); } },
+      { f: k("leans"), dur: 26, s: (f) => { const x = sx(7, f); return dolly([x + 50, 5, 26], [x - 2, 12, 0], pushK(f, k("leans"), 0.003), { fov: 48, roll: 0.06 }); } },
       // "water rushes in through the cannon holes": close on the lower gun ports at the waterline
-      { f: k("water"), cut: true, s: (f) => { const x = sx(7, f); return dolly([x + 4, 1.4, 16], [x + 1, 1.2, 5], pushK(f, k("water"), 0.003, 0.006, 30), { fov: 40, roll: 0.05 }); } },
+      { f: k("water"), cut: true, s: (f) => { const x = sx(7, f); return dolly([x + 10, 1.3, 14], [x + 1, 0.6, 5.2], pushK(f, k("water"), 0.003, 0.006, 30), { fov: 44, roll: 0.05 }); } },
       // "and down she goes": wide, the masts go under
-      { f: k("down", 2) - 4, cut: true, s: (f) => { const x = sx(7, f); return dolly([x + 20, 9, 68], [x + 1, 6, 0], pushK(f, k("down", 2), 0.0025), { fov: 46 }); } },
+      { f: k("down", 2) - 4, cut: true, s: (f) => { const x = sx(7, f); return dolly([x + 58, 10, 36], [x - 2, 8, 0], pushK(f, k("down", 2), 0.0025), { fov: 48 }); } },
     ],
     8: [
       // "Luckily, there was an inquiry to find out who was to blame": the hall, judges at the bench, the accused
