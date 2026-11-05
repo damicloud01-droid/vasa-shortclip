@@ -262,7 +262,7 @@ const CAMS = (): Record<number, Key[]> => {
     ],
     11: [
       // "Three hundred and thirty-three years later, they pulled her up": the bare hull rises between pontoons
-      { f: k("Three"), s: (f) => dolly([30, 5, 48], [0, 3, 0], pushK(f, k("Three"), 0.002), { fov: 44 }) },
+      { f: k("Three"), s: (f) => dolly([24, 11, 34], [-1, 4, 0], pushK(f, k("Three"), 0.002), { fov: 44 }) },
     ],
     12: [
       // "Today she's the most visited museum in Scandinavia": the hall, tourists, the ship
