@@ -369,7 +369,7 @@ const lake = (cam: CamInfo, t: number, out: Stage) => {
     out.places.push(pl);
   } else {
     const bob = 0.04 * Math.sin(t * 3);
-    out.places.push(person(cam, { i: 140, o: CANOE_KID, okey: "ckid" }, x + 0.9, -0.55 + bob, z - 0.4, { side: false, mirror: false }, { mode: "sit", expr: "dazed", blink: lidAt(t, 140) }, {}, 0.8));
+    out.places.push(person(cam, { i: 140, o: CANOE_KID, okey: "ckid" }, x + 0.9, -0.3 + bob, z - 0.4, { side: false, mirror: false }, { mode: "sit", expr: "dazed", blink: lidAt(t, 140) }, {}, 0.8));
     const u = q(((t * 0.5) % 1), 30);
     out.fx.push({ key: `ring${u}`, cw: 600, ch: 600, draw: (p) => fxRing(p, u), x: x + 0.9, y: 0.03, z: z - 0.4, w: 2.2, h: 2.2, flat: true });
   }
