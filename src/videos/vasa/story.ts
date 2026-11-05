@@ -254,11 +254,11 @@ const CAMS = (): Record<number, Key[]> => {
     ],
     10: [
       // "The Vasa was standing up": the cut-through ship, rocking
-      { f: k("Vasa", 2), s: (f) => dolly(add(CUTAWAY, [0, 6.5, -24]), add(CUTAWAY, [0, 5.5, 0]), pushK(f, k("Vasa", 2), 0.0022), { fov: 44 }) },
+      { f: k("Vasa", 2), s: (f) => dolly(add(CUTAWAY, [0, 3, -26]), add(CUTAWAY, [0, 0.6, 0]), pushK(f, k("Vasa", 2), 0.0022), { fov: 44 }) },
       // "two decks of heavy cannons up high"
-      { f: k("decks") - 8, dur: 24, s: (f) => dolly(add(CUTAWAY, [0, 8.5, -13]), add(CUTAWAY, [0, 7.4, 0]), pushK(f, k("decks"), 0.003), { fov: 40 }) },
+      { f: k("decks") - 8, dur: 24, s: (f) => dolly(add(CUTAWAY, [0, 4.2, -14]), add(CUTAWAY, [0, 2.6, 0]), pushK(f, k("decks"), 0.003), { fov: 40 }) },
       // "and not nearly enough stones in the bottom"
-      { f: k("stones") - 8, dur: 24, s: (f) => dolly(add(CUTAWAY, [0, 1.6, -11]), add(CUTAWAY, [0, 1.0, 0]), pushK(f, k("stones"), 0.003, 0.006, 30), { fov: 40, roll: 0.04 }) },
+      { f: k("stones") - 8, dur: 24, s: (f) => dolly(add(CUTAWAY, [0, -1.8, -12]), add(CUTAWAY, [0, -3.6, 0]), pushK(f, k("stones"), 0.003, 0.006, 30), { fov: 40, roll: 0.04 }) },
     ],
     11: [
       // "Three hundred and thirty-three years later, they pulled her up": the bare hull rises between pontoons
