@@ -308,7 +308,7 @@ export class World {
     const sg = new THREE.ExtrudeGeometry(shell, { depth, bevelEnabled: false }); sg.translate(0, 0, -depth / 2);
     const hullM = twoTone(new THREE.MeshLambertMaterial({ color: "#8a5a33" }));
     const back = new THREE.ShapeGeometry(new THREE.Shape(inner.map((p) => p.clone()))); back.translate(0, 0, depth / 2 - 0.05);
-    const inside = lam("sectionIn", () => ({ color: "#6a4428" }));
+    const inside = lam("sectionIn", () => ({ color: "#6a4428", side: THREE.DoubleSide }));
     const add = (g: THREE.BufferGeometry, m: THREE.Material) => { const mm = new THREE.Mesh(g, m); mm.castShadow = true; mm.receiveShadow = true; S.add(mm); return mm; };
     add(sg, hullM); add(back, inside);
     const deckM = lam("planksHD", () => ({ map: planksHD() }));
@@ -326,9 +326,9 @@ export class World {
       add(new THREE.IcosahedronGeometry(r, 1).translate(sx, sy, -1.2), stone);
     // water tank: glass front just in front of the cut face, opaque deep back and floor, a water top behind the face
     const tank = new THREE.Group();
-    const front = new THREE.Mesh(new THREE.PlaneGeometry(120, 14).translate(0, -7, 0), new THREE.MeshBasicMaterial({ color: new THREE.Color("#2a8fd0"), transparent: true, opacity: 0.42, depthWrite: false }));
+    const front = new THREE.Mesh(new THREE.PlaneGeometry(120, 14).translate(0, -7, 0), new THREE.MeshBasicMaterial({ color: new THREE.Color("#2a8fd0"), transparent: true, opacity: 0.42, depthWrite: false, side: THREE.DoubleSide }));
     front.position.z = -depth / 2 - 0.06; front.renderOrder = 3; front.layers.set(NOINK); tank.add(front);
-    const deep = new THREE.MeshBasicMaterial({ color: new THREE.Color("#17507e") });
+    const deep = new THREE.MeshBasicMaterial({ color: new THREE.Color("#17507e"), side: THREE.DoubleSide });
     const bk = new THREE.Mesh(new THREE.PlaneGeometry(120, 14).translate(0, -7, 0), deep); bk.position.z = 50; bk.rotation.y = Math.PI; tank.add(bk);
     const fl = new THREE.Mesh(new THREE.PlaneGeometry(120, 52), lam("seabed", () => ({ color: "#c9b27a" }))); fl.rotation.x = -Math.PI / 2; fl.position.set(0, -14, 24); fl.receiveShadow = true; tank.add(fl);
     tank.position.set(...CUTAWAY);
