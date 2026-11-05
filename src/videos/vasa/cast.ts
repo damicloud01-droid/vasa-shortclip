@@ -364,7 +364,7 @@ const lake = (cam: CamInfo, t: number, out: Stage) => {
   if (c.over < 0.5) {
     const expr: Expr = c.stand ? "nervous" : "smile";
     const fo: FrontOpts = { mode: c.stand ? "stand" : "sit", expr, blink: lidAt(t, 140), wave: c.stand ? q(Math.sin(t * 10), 30) : undefined };
-    const pl = person(cam, { i: 140, o: CANOE_KID, okey: "ckid" }, x - Math.sin(c.roll) * 0.4, c.stand ? 0.1 : 0.05, z, { side: false, mirror: false }, fo, {}, 0.8);
+    const pl = person(cam, { i: 140, o: CANOE_KID, okey: "ckid" }, x - Math.sin(c.roll) * 0.4, c.stand ? 0.2 : 0.3, z - 0.15, { side: false, mirror: false }, fo, {}, 0.85);
     pl.roll = c.roll * 1.3;
     out.places.push(pl);
   } else {

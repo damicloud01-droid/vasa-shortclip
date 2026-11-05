@@ -244,7 +244,7 @@ const CAMS = (): Record<number, Key[]> => {
       { f: k("Luckily"), s: (f) => dolly(add(INQUIRY, [0, 2.4, -9]), add(INQUIRY, [0, 1.6, 2]), pushK(f, k("Luckily"), 0.0022), { fov: 46 }) },
       { f: k("blame") - 8, dur: 24, s: (f) => dolly(add(INQUIRY, [1, 1.9, -5.5]), add(INQUIRY, [0, 2.0, 3.2]), pushK(f, k("blame"), 0.0025), { fov: 40 }) },
       // "Unluckily, the man who designed her": pan to his portrait, the candle in front
-      { f: k("Unluckily") - 6, dur: 26, s: (f) => dolly(add(INQUIRY, [3.4, 2.6, 0.4]), add(INQUIRY, [6.9, 2.7, 3.2]), pushK(f, k("Unluckily"), 0.003, 0.006, 30), { fov: 38, roll: -0.04 }) },
+      { f: k("Unluckily") - 6, dur: 26, s: (f) => dolly(add(INQUIRY, [1.6, 2.5, -1.8]), add(INQUIRY, [6.4, 2.4, 3.0]), pushK(f, k("Unluckily"), 0.003, 0.006, 30), { fov: 38, roll: -0.04 }) },
     ],
     9: [
       // "You see, a ship is like a canoe. Sit down, and it's steady": golden lake, a kid in a canoe

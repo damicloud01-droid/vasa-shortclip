@@ -246,7 +246,7 @@ export class World {
     for (let i = 0; i < 26; i++) { const a = (i / 26) * Math.PI * 2 + 0.2; prop(b, kit, ["tree_oak", "tree_cone", "tree_fat", "tree_default"][i % 4], lx + Math.cos(a) * (44 + (i % 3) * 7), 0.35, lz + Math.sin(a) * (44 + (i % 3) * 7), 9 + (i % 4) * 2, i * 11); }
     b.add(boxGeo(V(lx - 22, 0.3, lz + 30), V(lx - 19, 0.55, lz + 37), 1), planks);
     const canoeM = lam("canoe", () => ({ color: "#c8632f" }));
-    const cm = new THREE.Mesh(canoeGeo(4.6, 0.95, 0.38), twoTone(new THREE.MeshLambertMaterial({ color: "#c8632f", side: THREE.DoubleSide }))); void canoeM;
+    const cm = new THREE.Mesh(canoeGeo(4.6, 0.95, 0.38), twoTone(new THREE.MeshLambertMaterial({ color: "#e0843a", side: THREE.DoubleSide }))); void canoeM;
     cm.castShadow = true; cm.receiveShadow = true; this.canoe.add(cm); R.add(this.canoe);
 
     // ---- the cut-through ship in its aquarium (day diagram) ----
