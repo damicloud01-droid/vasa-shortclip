@@ -403,7 +403,7 @@ const museum = (cam: CamInfo, t: number, out: Stage) => {
     blob(out, x, y0, z);
   }
   // close by the low final camera: a kid gives the hull a push (nothing moves)
-  const kx = x0 + 6.4, kz = z0 - 14;
+  const kx = x0 + 23.5, kz = z0 - 33;
   out.places.push(person(cam, { i: 199, o: KID, okey: "kid" }, kx, y0, kz, { side: false, mirror: false }, { mode: "stand", expr: live(t, W("finally")) ? "smile_closed" : "grin", blink: lidAt(t, 199), wave: 0.6 }, {}, 0.72));
   blob(out, kx, y0, kz, 0.72);
 };

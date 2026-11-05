@@ -268,7 +268,7 @@ const CAMS = (): Record<number, Key[]> => {
       // "Today she's the most visited museum in Scandinavia": the hall, tourists, the ship
       { f: k("Today"), s: (f) => dolly(add(MUSEUM, [26, 3.5, -34]), add(MUSEUM, [0, 9, 0]), pushK(f, k("Today"), 0.002), { fov: 46 }) },
       // "and she's finally sitting perfectly still": low, by a tourist, slow creep to the end
-      { f: k("finally") - 8, cut: true, s: (f) => dolly(add(MUSEUM, [8, 2.2, -20]), add(MUSEUM, [0, 7, 0]), pushK(f, k("finally"), 0.0018), { fov: 42 }) },
+      { f: k("finally") - 8, cut: true, s: (f) => dolly(add(MUSEUM, [30, 3.2, -42]), add(MUSEUM, [-2, 11, 0]), pushK(f, k("finally"), 0.0018), { fov: 46 }) },
     ],
   };
 };
