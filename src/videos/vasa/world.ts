@@ -29,7 +29,7 @@ const haloTex = () => ctex("sunHalo", 256, 256, (g) => {
   g.putImageData(im, 0, 0);
 });
 /** per-shot sun (camera-relative az / el) where the preset would light the subject badly */
-const SUN_SHOT: Record<number, { az?: number; el?: number }> = { 1: { az: 140, el: 40 }, 2: { az: 130 }, 4: { az: 140, el: 42 }, 6: { az: 30, el: 9 }, 7: { az: 150, el: 38 }, 9: { az: -25, el: 8 }, 11: { az: 140, el: 40 }, 12: { az: 110, el: 55 } };
+const SUN_SHOT: Record<number, { az?: number; el?: number }> = { 1: { az: 140, el: 40 }, 2: { az: 130 }, 4: { az: 140, el: 42 }, 6: { az: 30, el: 9 }, 7: { az: 150, el: 38 }, 9: { az: 65, el: 10 }, 11: { az: 140, el: 40 }, 12: { az: 110, el: 55 } };
 
 /** horizontal quad facing up at height y over x0..x1, z0..z1 (z0 < z1), uv tiled by u, v */
 function quadUp(x0: number, x1: number, z0: number, z1: number, u: number, v: number, y = D0) {
